@@ -48,7 +48,7 @@ def scrape_info():
     mars_df = tables[0]
     mars_df.rename(columns={1:'Values', 0:'Facts'}).set_index('Facts')
     mars_df_html = mars_df.to_html(index=False).replace('\n', "")
-    mars_dict['mars_html'] = mars_dict
+    mars_dict['mars_html'] = mars_df_html
     executable_path = {'executable_path': 'chromedriver'}
     browser = Browser('chrome', **executable_path, headless=False)
     url5='https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
@@ -77,9 +77,5 @@ def scrape_info():
         mars_list.append(astro_dict)
         time.sleep(3)
     mars_dict['mars_list'] = mars_list
-    # mars_dict['cerberus'] = mars_list[0]
-    # mars_dict['schiaparelli'] = mars_list[1]
-    # mars_dict['syrtis_major'] = mars_list[2]
-    # mars_dict['valles_marineris'] = mars_list[3]
     browser.quit()
     return mars_dict
